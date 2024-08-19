@@ -41,11 +41,11 @@ def main():
             line_message = "({}) Enter new guess ({} remaining attempts): ".format(
                 previous_masked_word, game['remaining_misses'])
 
-            users_guess = _input(line_message)
+            users_guess = _input(line_message).strip()
             try:
                 guess_letter(game, users_guess)
             except InvalidGuessedLetterException:
-                print("\t Your guess is incorrect. Please guess again.")
+                print("\t Your guess is incorrect. Please guess a single letter you haven't guessed before.")
                 continue
 
             new_masked_word = game['masked_word']
@@ -54,6 +54,7 @@ def main():
                 print("\tCongratulations! That's correct.")
             else:
                 print("\t:( That's a miss!")
+
     except GameWonException:
         print("\t YES! You win! The word was: {}".format(game['answer_word']))
     except GameLostException:
